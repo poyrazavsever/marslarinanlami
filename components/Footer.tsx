@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className='flex flex-col items-end gap-4'>
+    <footer className='flex flex-col items-end gap-4 py-16'>
 
       <div className='flex items-center gap-4'>
 
