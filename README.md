@@ -1,40 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🇹🇷 Marşların Anlamı
 
-## Getting Started
+**Marşların Anlamı**, kullanıcıların Türkiye Cumhuriyeti’ne ait tarihi ve kültürel marşları okuyabildiği, bilmedikleri kelimelerin anlamlarını öğrenebildiği ve her marşın tarihçesini/hikayesini inceleyebildiği açık kaynaklı bir web uygulamasıdır.
 
-First, run the development server:
+---
+
+### ✨ Özellikler
+
+- 📜 **Marş Okuma** – Tüm marşları sade ve odaklı bir arayüzde okuyabilirsiniz.  
+- 📚 **Kelime Anlamları** – Bilinmeyen sözcüklerin üzerine gelerek anlamlarını anında görebilirsiniz.  
+- 🧠 **Hikâyeler & Tarihçe** – Her marşın yazılış amacı, yazarı ve tarihçesi hakkında detaylı bilgiler.  
+- 📱 **Mobil Uyumlu** – Telefon, tablet ve masaüstü cihazlarda modern tasarımıyla uyumlu.  
+- 🌐 **Açık Kaynak** – Katkıya açık, özgürce geliştirilebilir bir yapı.
+
+---
+
+### 📸 Ekran Görüntüsü
+
+![Ana Sayfa Görseli](public/anasayfa.png)
+
+---
+
+### 🚀 Kurulum
+
+Projeyi kendi bilgisayarınızda çalıştırmak için:
 
 ```bash
+# Repoyu klonla
+git clone https://github.com/poyrazavsever/marslarinanlami.git
+
+# Proje klasörüne gir
+cd marslarinanlami
+
+# Bağımlılıkları yükle
+npm install
+
+# Geliştirme sunucusunu başlat
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### 🔧 Kullanılan Teknolojiler
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- [Next.js](https://nextjs.org/)  
+- [Tailwind CSS](https://tailwindcss.com/)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🛠️ Geliştirme Süreci
 
-## Learn More
+Bu proje, gençlerin ve toplumun marşları sadece ezberlemeden **anlamalarını**, marşların **tarihi bağlamını** öğrenmelerini ve **kültürel mirasa bilinçli şekilde yaklaşmalarını** sağlamak amacıyla geliştirilmiştir.
 
-To learn more about Next.js, take a look at the following resources:
+**Amaç:** Bilgilenmek, bilinçlenmek, kültürel mirası anlamak.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📬 Katkı Sağla
 
-## Deploy on Vercel
+Katkıda bulunmak isterseniz:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Bu repoyu forklayın  
+2. Değişikliklerinizi yapın  
+3. Pull request gönderin  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+İçerik geliştirme, kelime sözlüğü genişletme veya yeni marş ekleme gibi katkılar memnuniyetle karşılanır.
+
+---
+
+### 🧑‍💻 Geliştirici
+
+**Poyraz Avsever**  
+🌐 [pavsever.com](https://www.pavsever.com)  
+🐙 GitHub: [@poyrazavsever](https://github.com/poyrazavsever)
+
+---
+
+### 📄 Lisans
+
+Bu proje [MIT Lisansı](./LICENSE) ile lisanslanmıştır.
