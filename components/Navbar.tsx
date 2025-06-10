@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
       <div className='flex items-center gap-4'>
         <a href="/" className={linkClass('/')}>Ana Sayfa</a>
         <a href="/marslar" className={linkClass('/marslar')}>Marşlar</a>
-        <a href="/iletisim" className={linkClass('/iletisim')}>İletişim</a>
+        <a href="/giris" className={linkClass('/giris')}>Giriş Yap</a>
       </div>
 
     </nav>
