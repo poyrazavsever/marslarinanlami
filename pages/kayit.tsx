@@ -9,7 +9,7 @@ const Register = () => {
   const [confirm, setConfirm] = useState('');
 
   const handleProviderRegister = (provider: 'google' | 'github') => {
-    toast.success(`${provider.toUpperCase()} ile kayıt olundu (simülasyon)`);
+    toast.error(`${provider} ile kayıt şuan için desteklenmiyor.`);
   };
 
   const handleEmailRegister = (e: React.FormEvent) => {

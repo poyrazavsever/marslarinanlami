@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleProviderLogin = (provider: 'google' | 'github') => {
-    toast.success(`${provider.toUpperCase()} ile giriş yapıldı (simülasyon)`);
+    toast.error(`${provider.toUpperCase()} ile giriş şuan için desteklenmiyor.`);
   };
 
   const handleEmailLogin = (e: React.FormEvent) => {
