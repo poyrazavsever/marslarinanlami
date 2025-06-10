@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
@@ -11,6 +11,17 @@ const Register = () => {
   const [confirm, setConfirm] = useState('');
 
   const router = useRouter();
+
+  useEffect(() => {
+      const checkUser = async () => {
+        const { data } = await supabase.auth.getUser();
+        if (data.user) {
+          toast.error('Zaten kayıt oldunuz!');
+          router.replace('/');
+        }
+      };
+      checkUser();
+    }, [router]);
 
   const handleProviderRegister = (provider: 'google' | 'github') => {
     toast.error(`${provider} ile kayıt şuan için desteklenmiyor.`);

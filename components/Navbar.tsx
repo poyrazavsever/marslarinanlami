@@ -1,13 +1,31 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { supabase } from '../lib/supabaseClient'
 
 const Navbar: React.FC = () => {
   const pathname: string = usePathname()
+  const [user, setUser] = useState<any>(null)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser()
+      setUser(data.user)
+    }
+    getUser()
+
+    // Kullanıcı değişimini dinle
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+    return () => {
+      listener.subscription.unsubscribe()
+    }
+  }, [])
 
   const linkClass = (path: string): string =>
-    `px-2 py-1 rounded-md transition-colors rounded-md ${
+    `px-2 py-1 rounded-md transition-colors ${
       pathname === path ? 'bg-neutral-200 text-neutral-700' : 'text-neutral-600'
     }`
 
@@ -26,7 +44,11 @@ const Navbar: React.FC = () => {
       <div className='flex items-center gap-4'>
         <a href="/" className={linkClass('/')}>Ana Sayfa</a>
         <a href="/marslar" className={linkClass('/marslar')}>Marşlar</a>
-        <a href="/giris" className={linkClass('/giris')}>Giriş Yap</a>
+        {user ? (
+          <a href="/mars-ekle" className={linkClass('/mars-ekle')}>Marş Ekle</a>
+        ) : (
+          <a href="/giris" className={linkClass('/giris')}>Giriş Yap</a>
+        )}
       </div>
 
     </nav>
