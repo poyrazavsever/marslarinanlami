@@ -1,9 +1,30 @@
 import React from 'react'
+import Card from '@/components/Card';
 
-const marslar = () => {
+const marslar = [
+  {
+    "id": "1",
+    "title": "İstiklal Marşı",
+    "mars": "Korkma, sönmez bu şafaklarda yüzen al sancak..."
+  },
+  {
+    "id": "2",
+    "title": "10. Yıl Marşı",
+    "mars": "Çıktık açık alınla on yılda her savaştan..."
+  }
+]
+
+const MarsEkle = () => {
   return (
-    <div>marslar</div>
+    <div className="max-w-2xl mx-auto py-8 px-4">
+      <h1 className="text-2xl font-bold mb-6 text-neutral-800">Marşlar</h1>
+      <div className="space-y-4">
+        {marslar.map((item) => (
+          <Card key={item.id} id={item.id} title={item.title} mars={item.mars} />
+        ))}
+      </div>
+    </div>
   )
 }
 
-export default marslar
+export default MarsEkle
