@@ -1,9 +1,9 @@
 import React from 'react'
 
-const iletisim = () => {
+const Iletisim = () => {
   return (
-    <div>iletisim</div>
+    <div>Iletisim</div>
   )
 }
 
-export default iletisim
+export default Iletisim
