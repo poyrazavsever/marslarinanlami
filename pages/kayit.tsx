@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import { supabase } from '../lib/supabaseClient'; // Supabase client import
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
 
+  const router = useRouter();
+
   const handleProviderRegister = (provider: 'google' | 'github') => {
     toast.error(`${provider} ile kayıt şuan için desteklenmiyor.`);
   };
 
-  const handleEmailRegister = (e: React.FormEvent) => {
+  const handleEmailRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password || !confirm) {
       toast.error('Lütfen tüm alanları doldurun.');
@@ -22,7 +26,18 @@ const Register = () => {
       toast.error('Şifreler uyuşmuyor.');
       return;
     }
-    toast.success(`Kayıt başarılı! Hoş geldin, ${email.split('@')[0]}!`);
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(`Kayıt başarılı!`);
+      router.push('/giris');
+    }
   };
 
   return (

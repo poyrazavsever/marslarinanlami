@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import { supabase } from '../lib/supabaseClient'; // Supabase client import
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const router = useRouter();
+
   const handleProviderLogin = (provider: 'google' | 'github') => {
     toast.error(`${provider.toUpperCase()} ile giriş şuan için desteklenmiyor.`);
   };
 
-  const handleEmailLogin = (e: React.FormEvent) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && password) {
-      toast.success(`Hoş geldin, ${email.split('@')[0]}!`);
-    } else {
+    if (!email || !password) {
       toast.error('Lütfen e-posta ve şifre girin.');
+      return;
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(`Hoş geldin, ${email.split('@')[0]}!`);
+      router.push('/');
+      
     }
   };
 
