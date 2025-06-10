@@ -14,9 +14,9 @@ const marslar = [
   }
 ]
 
-const MarsEkle = () => {
+const Marslar = () => {
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4">
+    <div className="max-w-2xl py-16">
       <h1 className="text-2xl font-bold mb-6 text-neutral-800">Marşlar</h1>
       <div className="space-y-4">
         {marslar.map((item) => (
@@ -27,4 +27,4 @@ const MarsEkle = () => {
   )
 }
 
-export default MarsEkle
+export default Marslar
