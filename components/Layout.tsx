@@ -8,14 +8,31 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="max-w-5xl mx-auto font-poppins min-h-screen flex flex-col">
+    <div className="flex">
+      {/* Sol fotoğraf */}
+      <div className="w-20 h-screen sticky top-0 hidden md:block">
+        <img
+          src="/solfoto.png"
+          alt="Sol Taraf Fotografi"
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-      <Navbar />
+      {/* Ana içerik */}
+      <div className="flex-1 max-w-5xl mx-auto font-poppins min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </div>
 
-      <main className="flex-grow">{children}</main>
-
-      <Footer />
-      
+      {/* Sağ fotoğraf */}
+      <div className="w-20 h-screen sticky top-0 hidden md:block">
+        <img
+          src="/sagfoto.png" 
+          alt="Sag Taraf Fotografi"
+          className="w-full h-full object-cover"
+        />
+      </div>
     </div>
   );
 };
