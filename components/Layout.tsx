@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-
+import { Toaster } from 'react-hot-toast';
 interface LayoutProps {
   children: ReactNode;
 }
@@ -9,6 +9,19 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex">
+      {/* Toast bileşeni */}
+      
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className: 'bg-neutral-800 text-white',
+          style: {
+            fontFamily: 'Poppins, sans-serif',
+            fontSize: '14px',
+          },
+        }}
+      />
+
       {/* Sol fotoğraf */}
       <div className="w-20 h-screen sticky top-0 hidden md:block">
         <img
