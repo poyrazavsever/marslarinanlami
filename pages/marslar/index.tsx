@@ -22,7 +22,7 @@ const Marslar = () => {
 
   return (
     <div className="max-w-2xl py-16">
-      <h1 className="text-2xl font-bold mb-6 text-neutral-800">Marşlar</h1>
+      <h1 className="text-2xl mb-6 text-neutral-800">Marşlar</h1>
       <div className="space-y-4">
         {loading ? (
           <div className="flex items-center justify-center h-[80vh]">

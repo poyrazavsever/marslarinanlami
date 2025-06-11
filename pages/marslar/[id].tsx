@@ -56,15 +56,15 @@ const DetailPage = () => {
 	));
 
 	return (
-		<div className="max-w-2xl py-16">
-			<h1 className="text-2xl font-medium mb-4 text-neutral-800">
+		<div className="py-16">
+			<h1 className="text-2xl font-medium mb-4 text-neutral-800 text-center">
 				{mars.title}
 			</h1>
-			<div className="mb-6 text-neutral-600">
+			<div className="mb-6 text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed text-center py-8">
 				<ReactMarkdown>{mars.mars}</ReactMarkdown>
 			</div>
-			<h2 className="text-xl mb-2 text-neutral-800">Hikayesi</h2>
-			<div className="text-neutral-600">
+			<h2 className="text-xl text-neutral-800 mt-24 mb-4">Hikayesi</h2>
+			<div className="text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed">
 				<ReactMarkdown>{mars.hikaye}</ReactMarkdown>
 			</div>
 
