@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
 
       <div className='flex items-center gap-4'>
         <div className='flex items-center gap-2'>
-          <img src="logo.svg" alt="logoForNavbar" />
+          <img src="/logo.svg" alt="logoForNavbar" />
           <p className='font-medium text-base text-neutral-900'>Marşların Anlamı</p>
         </div>
 

@@ -1,43 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-// Örnek veri
-const marsData = [
-	{
-		id: '1',
-		title: 'İstiklal Marşı',
-		mars: `Korkma sönmez bu şafaklarda yüzen al sancak.
-		 Sönmeden yurdumun üstünde tüten en son ocak
-	     O benim milletimin yıldızıdır, parlayacak;
-		 O benimdir, o benim milletimindir ancak.`,
-		hikaye: 'İstiklal Marşı, Türk milletinin bağımsızlık mücadelesini anlatır.',
-	},
-	{
-		id: '2',
-		title: '10. Yıl Marşı',
-		mars: 'Çıktık açık alınla on yılda her savaştan.',
-		hikaye: '10. Yıl Marşı, Cumhuriyetin 10. yılı için yazılmıştır.',
-	},
-];
+import { supabase } from '@/lib/supabaseClient';
+import ReactMarkdown from 'react-markdown';
 
 const DetailPage = () => {
 	const router = useRouter();
 	const { id } = router.query;
 
-	// Seçili marşı bul
-	const mars = marsData.find((item) => item.id === id);
-
-	// Modal için state
+	const [mars, setMars] = useState<any>(null);
+	const [loading, setLoading] = useState(true);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [selectedWord, setSelectedWord] = useState<string | null>(null);
 
-	if (!mars)
-		return (
-			<div className="max-w-2xl mx-auto py-8 px-4">Marş bulunamadı.</div>
-		);
+	useEffect(() => {
+		if (!id) return;
+		const fetchMars = async () => {
+			setLoading(true);
+			const { data, error } = await supabase
+				.from('marslar')
+				.select('id, title, mars, hikaye')
+				.eq('id', id)
+				.eq('approved', true)
+				.single();
+			if (!error && data) setMars(data);
+			setLoading(false);
+		};
+		fetchMars();
+	}, [id]);
+
+	if (loading) {
+		return <div className="flex items-center justify-center h-[80vh]">
+			<div className="flex flex-col items-center space-y-4">
+				<div className="w-12 h-12 border-4 border-neutral-700 border-t-white rounded-full animate-spin"></div>
+				<p className="text-neutral-300 text-lg font-medium">Yükleniyor...</p>
+			</div>
+		</div>;
+	}
+
+	if (!mars) {
+		return <div className="w-full h-[80vh] flex items-center justify-center py-8 px-4 text-5xl font-medium italic text-neutral-500">Marş bulunamadı.</div>;
+	}
 
 	// Marşı kelimelere böl ve tıklanabilir yap
-	const marsWords = mars.mars.split(' ').map((word, idx) => (
+	const marsWords = mars.mars.split(' ').map((word: string, idx: number) => (
 		<span
 			key={idx}
 			className="cursor-pointer hover:underline"
@@ -55,9 +60,13 @@ const DetailPage = () => {
 			<h1 className="text-2xl font-medium mb-4 text-neutral-800">
 				{mars.title}
 			</h1>
-			<div className="mb-6 text-neutral-600">{marsWords}</div>
+			<div className="mb-6 text-neutral-600">
+				<ReactMarkdown>{mars.mars}</ReactMarkdown>
+			</div>
 			<h2 className="text-xl mb-2 text-neutral-800">Hikayesi</h2>
-			<p className="text-neutral-600">{mars.hikaye}</p>
+			<div className="text-neutral-600">
+				<ReactMarkdown>{mars.hikaye}</ReactMarkdown>
+			</div>
 
 			{/* Modal */}
 			{modalOpen && selectedWord && (
