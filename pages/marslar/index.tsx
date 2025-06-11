@@ -25,7 +25,12 @@ const Marslar = () => {
       <h1 className="text-2xl font-bold mb-6 text-neutral-800">Marşlar</h1>
       <div className="space-y-4">
         {loading ? (
-          <div>Yükleniyor...</div>
+          <div className="flex items-center justify-center h-[80vh]">
+            <div className="flex flex-col items-center space-y-4">
+              <div className="w-12 h-12 border-4 border-neutral-700 border-t-white rounded-full animate-spin"></div>
+              <p className="text-neutral-300 text-lg font-medium">Yükleniyor...</p>
+            </div>
+        </div>
         ) : (
           marslar.map((item) => (
             <Card key={item.id} id={item.id} title={item.title} mars={item.mars} />
