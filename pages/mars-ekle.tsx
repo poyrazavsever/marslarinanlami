@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 const MdEditor = dynamic(() => import('react-markdown-editor-lite'), { ssr: false });
 import 'react-markdown-editor-lite/lib/index.css';
 import toast from 'react-hot-toast';
 import { supabase } from '../lib/supabaseClient';
+import MarkdownIt from 'markdown-it';
+
 
 const MarsEkle = () => {
   const [title, setTitle] = useState('');
@@ -11,6 +14,20 @@ const MarsEkle = () => {
   const [mars, setMars] = useState('');
   const [hikaye, setHikaye] = useState('');
   const [loading, setLoading] = useState(false);
+  const mdParser = new MarkdownIt();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) {
+        toast.error('Bu sayfaya erişmek için giriş yapmalısınız.');
+        router.replace('/giris'); // Giriş sayfanızın yolu
+      }
+    };
+    checkAuth();
+  }, []);
 
   // Şiir satırlarını <p> ile, boş satırları <br /> ile sarmala
   function convertLinesToParagraphs(text: string) {
@@ -113,9 +130,9 @@ const MarsEkle = () => {
           <MdEditor
             value={hikaye}
             style={{ height: '200px' }}
-            renderHTML={text => text}
+            renderHTML={text => mdParser.render(text)}
             onChange={({ text }) => setHikaye(text)}
-            view={{ menu: true, md: true, html: false }}
+            view={{ menu: true, md: true, html: true }}
             placeholder="Marşın hikayesini yazın..."
           />
         </div>
