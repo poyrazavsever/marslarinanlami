@@ -98,9 +98,14 @@ const DetailPage = () => {
 
 	return (
 		<div className="py-16">
-			<h1 className="text-2xl font-medium mb-4 text-neutral-800 text-center">
-				{mars.title}
-			</h1>
+			
+			<div className='flex items-center justify-between mb-4'>
+				<h1 className="text-2xl font-medium mb-4 text-neutral-800 text-center">
+					{mars.title}
+				</h1>
+				<a href='/marslar' className='px-4 py-2 bg-neutral-800 text-white rounded hover:bg-neutral-600 transition-all cursor-pointer'>Geri Dön</a>
+			</div>
+
 			<div className="mb-6 text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed text-center py-8">
 				{renderClickablePoem(mars.mars)}
 				<p className='text-neutral-800 font-semibold pt-6'>{mars.author}</p>
