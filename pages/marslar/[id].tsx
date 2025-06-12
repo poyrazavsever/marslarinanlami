@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '@/lib/supabaseClient';
-import ReactMarkdown from 'react-markdown';
 
 const DetailPage = () => {
 	const router = useRouter();
@@ -41,19 +40,31 @@ const DetailPage = () => {
 		return <div className="w-full h-[80vh] flex items-center justify-center py-8 px-4 text-5xl font-medium italic text-neutral-500">Marş bulunamadı.</div>;
 	}
 
-	// Marşı kelimelere böl ve tıklanabilir yap
-	const marsWords = mars.mars.split(' ').map((word: string, idx: number) => (
-		<span
-			key={idx}
-			className="cursor-pointer hover:underline"
-			onClick={() => {
-				setSelectedWord(word);
-				setModalOpen(true);
-			}}
-		>
-			{word}{' '}
-		</span>
-	));
+	// HTML'i React bileşenlerine çeviren fonksiyon
+	const renderClickablePoem = (html: string) => {
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(`<div>${html}</div>`, 'text/html');
+		const paragraphs = Array.from(doc.querySelectorAll('p'));
+
+		return paragraphs.map((p, i) => (
+			<p key={i} className="mb-1">
+				{p.textContent?.split(' ').map((word, idx) =>
+					word ? (
+						<span
+							key={idx}
+							className="cursor-pointer hover:underline"
+							onClick={() => {
+								setSelectedWord(word);
+								setModalOpen(true);
+							}}
+						>
+							{word}{' '}
+						</span>
+					) : ' '
+				)}
+			</p>
+		));
+	};
 
 	return (
 		<div className="py-16">
@@ -61,14 +72,13 @@ const DetailPage = () => {
 				{mars.title}
 			</h1>
 			<div className="mb-6 text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed text-center py-8">
-				<ReactMarkdown>{mars.mars}</ReactMarkdown>
+				{renderClickablePoem(mars.mars)}
 			</div>
 			<h2 className="text-xl text-neutral-800 mt-24 mb-4">Hikayesi</h2>
-			<div className="text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed">
-				<ReactMarkdown>{mars.hikaye}</ReactMarkdown>
-			</div>
-
-			{/* Modal */}
+			<div
+				className="text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed"
+				dangerouslySetInnerHTML={{ __html: mars.hikaye }}
+			/>
 			{modalOpen && selectedWord && (
 				<div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
 					<div className="bg-white border border-neutral-300 rounded-md p-6 min-w-[300px]">
