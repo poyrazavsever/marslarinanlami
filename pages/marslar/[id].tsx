@@ -40,31 +40,42 @@ const DetailPage = () => {
 		return <div className="w-full h-[80vh] flex items-center justify-center py-8 px-4 text-5xl font-medium italic text-neutral-500">Marş bulunamadı.</div>;
 	}
 
-	// HTML'i React bileşenlerine çeviren fonksiyon
 	const renderClickablePoem = (html: string) => {
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(`<div>${html}</div>`, 'text/html');
-		const paragraphs = Array.from(doc.querySelectorAll('p'));
+		const container = doc.body.firstChild as HTMLElement;
+		const elements: React.ReactNode[] = [];
 
-		return paragraphs.map((p, i) => (
-			<p key={i} className="mb-1">
-				{p.textContent?.split(' ').map((word, idx) =>
-					word ? (
-						<span
-							key={idx}
-							className="cursor-pointer hover:underline"
-							onClick={() => {
-								setSelectedWord(word);
-								setModalOpen(true);
-							}}
-						>
-							{word}{' '}
-						</span>
-					) : ' '
-				)}
-			</p>
-		));
-	};
+		if (!container) return null;
+
+		container.childNodes.forEach((node, i) => {
+			if (node.nodeName === 'P') {
+				const text = node.textContent || '';
+				elements.push(
+					<p key={`p-${i}`} className="mb-1">
+						{text.split(' ').map((word, idx) =>
+							word ? (
+								<span
+									key={idx}
+									className="cursor-pointer hover:underline"
+									onClick={() => {
+										setSelectedWord(word);
+										setModalOpen(true);
+									}}
+								>
+									{word}{' '}
+								</span>
+							) : ' '
+						)}
+					</p>
+				);
+			} else if (node.nodeName === 'BR') {
+				elements.push(<br key={`br-${i}`} />);
+			}
+		});
+
+		return elements;
+	  };
 
 	return (
 		<div className="py-16">
