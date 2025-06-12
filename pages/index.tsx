@@ -11,7 +11,7 @@ export default function Home() {
           Marşlar, milletlerin bağımsızlık ve özgürlük mücadelesini simgeleyen, milli duyguları en güçlü şekilde yansıtan eserlerdir.
           Bu sayfada, Türkiye'nin marşlarını ve bu marşlarda geçen önemli kelimelerin anlamlarını keşfedeceksiniz. 
         </p>  
-        <button className="px-4 py-2 bg-neutral-800 text-white rounded hover:bg-neutral-600 transition-all cursor-pointer">Marşlarımız</button>
+        <a href="/marslar" className="px-4 py-2 bg-neutral-800 text-white rounded hover:bg-neutral-600 transition-all cursor-pointer">Marşlarımız</a>
 
       </section>
 
