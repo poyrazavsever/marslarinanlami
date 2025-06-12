@@ -27,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <img
           src="/solfoto.png"
           alt="Sol Taraf Fotografi"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-top object-cover"
         />
       </div>
 
@@ -43,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <img
           src="/sagfoto.png" 
           alt="Sag Taraf Fotografi"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-top object-cover"
         />
       </div>
     </div>
