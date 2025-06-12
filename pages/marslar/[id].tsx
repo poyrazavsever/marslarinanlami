@@ -20,7 +20,7 @@ const DetailPage = () => {
 			setLoading(true);
 			const { data, error } = await supabase
 				.from('marslar')
-				.select('id, title, mars, hikaye')
+				.select('id, title, mars, hikaye, author')
 				.eq('id', id)
 				.eq('approved', true)
 				.single();
@@ -103,12 +103,12 @@ const DetailPage = () => {
 			</h1>
 			<div className="mb-6 text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed text-center py-8">
 				{renderClickablePoem(mars.mars)}
+				<p className='text-neutral-800 font-semibold pt-6'>{mars.author}</p>
 			</div>
 			<h2 className="text-xl text-neutral-800 mt-24 mb-4">Hikayesi</h2>
-			<div
-				className="text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed"
-				dangerouslySetInnerHTML={{ __html: mars.hikaye }}
-			/>
+			<div className="text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed markdown-custom">
+				<ReactMarkdown>{mars.hikaye}</ReactMarkdown>
+			</div>
 
 			{modalOpen && selectedWord && (
 				<div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">

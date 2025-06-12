@@ -7,3 +7,61 @@
 body{
   font-family: var(--font-poppins);
 }
+
+.markdown-custom h1 {
+  @apply text-3xl font-bold mt-6 mb-4;
+}
+.markdown-custom h2 {
+  @apply text-2xl font-semibold mt-5 mb-3;
+}
+.markdown-custom h3 {
+  @apply text-xl font-semibold mt-4 mb-2;
+}
+.markdown-custom h4 {
+  @apply text-lg font-semibold mt-3 mb-2;
+}
+.markdown-custom h5 {
+  @apply text-base font-semibold mt-2 mb-1;
+}
+.markdown-custom h6 {
+  @apply text-sm font-semibold mt-2 mb-1;
+}
+.markdown-custom p {
+  @apply mb-3 leading-relaxed;
+}
+.markdown-custom ul {
+  @apply list-disc ml-6 mb-3;
+}
+.markdown-custom ol {
+  @apply list-decimal ml-6 mb-3;
+}
+.markdown-custom li {
+  @apply mb-1;
+}
+.markdown-custom a {
+  @apply text-blue-600 underline hover:text-blue-800 transition;
+}
+.markdown-custom blockquote {
+  @apply border-l-4 border-neutral-400 pl-4 italic text-neutral-600 my-4;
+}
+.markdown-custom pre {
+  @apply bg-neutral-100 rounded p-4 my-4 overflow-x-auto text-sm;
+}
+.markdown-custom code {
+  @apply bg-neutral-200 rounded px-1 py-0.5 font-mono text-sm;
+}
+.markdown-custom img {
+  @apply max-w-full rounded my-4 mx-auto;
+}
+.markdown-custom hr {
+  @apply border-t border-neutral-300 my-6;
+}
+.markdown-custom table {
+  @apply w-full border-collapse my-4;
+}
+.markdown-custom th, .markdown-custom td {
+  @apply border border-neutral-300 px-3 py-2;
+}
+.markdown-custom th {
+  @apply bg-neutral-100 font-semibold;
+}
