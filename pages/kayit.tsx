@@ -46,8 +46,8 @@ const Register = () => {
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success(`Kayıt başarılı!`);
-      router.push('/giris');
+      toast.success(`Kayıt başarılı! Hoş geldin, ${email.split('@')[0]}!`);
+      router.push('/');
     }
   };
 
