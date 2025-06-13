@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 import { supabase } from '../lib/supabaseClient';
 import MarkdownIt from 'markdown-it';
 
-
 const MarsEkle = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -23,13 +22,12 @@ const MarsEkle = () => {
       const { data } = await supabase.auth.getUser();
       if (!data.user) {
         toast.error('Bu sayfaya erişmek için giriş yapmalısınız.');
-        router.replace('/giris'); // Giriş sayfanızın yolu
+        router.replace('/giris');
       }
     };
     checkAuth();
   }, []);
 
-  // Şiir satırlarını <p> ile, boş satırları <br /> ile sarmala
   function convertLinesToParagraphs(text: string) {
     const lines = text.split('\n');
     let html = '';
@@ -45,8 +43,8 @@ const MarsEkle = () => {
   }
 
   const handleSave = async () => {
-    if (!title.trim() || !author.trim() || !mars.trim() || !hikaye.trim()) {
-      toast.error('Lütfen tüm alanları doldurun.');
+    if (!title.trim() || !mars.trim()) {
+      toast.error('Lütfen başlık ve marş (şiir) alanlarını doldurun.');
       return;
     }
 
@@ -66,9 +64,9 @@ const MarsEkle = () => {
     const { error } = await supabase.from('marslar').insert([
       {
         title,
-        author,
+        author: author || null,
         mars: marsHtml,
-        hikaye, // markdown olarak kaydediliyor
+        hikaye: hikaye || null,
         approved: false,
       },
     ]);
@@ -86,8 +84,8 @@ const MarsEkle = () => {
   };
 
   return (
-    <div className="max-w-3xl py-16 px-4 mx-auto">
-      <div className="space-y-6 bg-white border border-neutral-200 rounded-md p-6">
+    <div className="max-w-3xl mx-auto py-12 sm:py-16 px-4 sm:px-6 md:px-8">
+      <div className="space-y-6 bg-white border border-neutral-200 rounded-md p-4 sm:p-6">
         {/* Başlık */}
         <div>
           <label className="block text-sm font-medium text-neutral-700 mb-1">Başlık</label>
@@ -100,9 +98,11 @@ const MarsEkle = () => {
           />
         </div>
 
-        {/* Yazar */}
+        {/* Yazar (Opsiyonel) */}
         <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">Yazar</label>
+          <label className="block text-sm font-medium text-neutral-700 mb-1">
+            Yazar <span className="text-neutral-400 font-normal">(opsiyonel)</span>
+          </label>
           <input
             type="text"
             value={author}
@@ -112,7 +112,7 @@ const MarsEkle = () => {
           />
         </div>
 
-        {/* Marş (Şiir) */}
+        {/* Marş (Zorunlu) */}
         <div>
           <label className="block text-sm font-medium text-neutral-700 mb-1">Marş (Şiir)</label>
           <textarea
@@ -124,24 +124,32 @@ const MarsEkle = () => {
           />
         </div>
 
-        {/* Hikaye (Markdown Editor) */}
+        {/* Hikaye (Markdown, Opsiyonel) */}
         <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">Hikayesi (Markdown destekli)</label>
+          <label className="block text-sm font-medium text-neutral-700 mb-1">
+            Hikayesi <span className="text-neutral-400 font-normal">(opsiyonel)</span>
+          </label>
           <MdEditor
             value={hikaye}
             style={{ height: '200px' }}
             renderHTML={text => mdParser.render(text)}
             onChange={({ text }) => setHikaye(text)}
-            view={{ menu: true, md: true, html: true }}
+            view={{
+              menu: true,
+              md: true,
+              html: typeof window !== 'undefined' && window.innerWidth >= 768, // md: true, html: false on mobile
+            }}
             placeholder="Marşın hikayesini yazın..."
           />
         </div>
 
-        <span className='text-sm text-neutral-500 pb-4'>Gönderdiğiniz bu marş (şiir) moderatörler tarafından onaylandıktan sonra yayınlanacaktır. İlginiz ve katkınız için teşekkür ederiz.</span>
+        <p className="text-sm text-neutral-500 pt-2">
+          Gönderdiğiniz bu marş (şiir), moderatörler tarafından onaylandıktan sonra yayınlanacaktır. İlginiz ve katkınız için teşekkür ederiz.
+        </p>
 
         {/* Kaydet Butonu */}
         <button
-          className="w-full mt-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 transition cursor-pointer"
+          className="w-full mt-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 transition cursor-pointer text-sm font-medium"
           onClick={handleSave}
           disabled={loading}
         >
