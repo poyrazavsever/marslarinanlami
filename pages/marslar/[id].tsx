@@ -131,25 +131,30 @@ const DetailPage = () => {
 
 			{/* Kelime Açıklama Modalı */}
 			{modalOpen && selectedWord && (
-				<div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 px-4">
-					<div className="bg-white border border-neutral-300 rounded-md p-6 w-full max-w-3xl">
-						<h3 className="text-lg text-neutral-800 mb-2">{selectedWord}</h3>
+				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+					<div className="bg-white border border-neutral-300 rounded-md p-4 sm:p-6 w-full max-w-3xl md:max-h-[90vh] overflow-y-auto">
+						<h3 className="text-lg sm:text-xl text-neutral-800 mb-2">{selectedWord}</h3>
+
 						{wordLoading ? (
 							<p className="text-neutral-600 mb-4">Yükleniyor...</p>
 						) : (
-							<div className="text-neutral-600 mb-4 prose prose-neutral max-w-none">
+							<div className="text-neutral-600 mb-4 prose prose-neutral max-w-none text-xs sm:text-base">
 								<ReactMarkdown>{wordInfo}</ReactMarkdown>
 							</div>
 						)}
-						<button
-							className="mt-2 px-4 py-1 bg-neutral-800 text-white rounded hover:bg-red-800 transition-all cursor-pointer"
-							onClick={() => setModalOpen(false)}
-						>
-							Kapat
-						</button>
+
+						<div className="flex justify-end">
+							<button
+								className="mt-2 px-4 py-2 bg-neutral-800 text-white rounded hover:bg-red-800 transition-all text-sm sm:text-base"
+								onClick={() => setModalOpen(false)}
+							>
+								Kapat
+							</button>
+						</div>
 					</div>
 				</div>
 			)}
+
 		</div>
 	);
 };
