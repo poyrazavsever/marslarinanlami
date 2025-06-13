@@ -84,40 +84,55 @@ const DetailPage = () => {
 	};
 
 	if (loading) {
-		return <div className="flex items-center justify-center h-[80vh]">
-			<div className="flex flex-col items-center space-y-4">
-				<div className="w-12 h-12 border-4 border-neutral-700 border-t-white rounded-full animate-spin"></div>
-				<p className="text-neutral-300 text-lg font-medium">Yükleniyor...</p>
+		return (
+			<div className="flex items-center justify-center h-[80vh]">
+				<div className="flex flex-col items-center space-y-4">
+					<div className="w-12 h-12 border-4 border-neutral-700 border-t-white rounded-full animate-spin"></div>
+					<p className="text-neutral-300 text-lg font-medium">Yükleniyor...</p>
+				</div>
 			</div>
-		</div>;
+		);
 	}
 
 	if (!mars) {
-		return <div className="w-full h-[80vh] flex items-center justify-center py-8 px-4 text-5xl font-medium italic text-neutral-500">Marş bulunamadı.</div>;
+		return (
+			<div className="w-full h-[80vh] flex items-center justify-center py-8 px-4 text-5xl font-medium italic text-neutral-500 text-center">
+				Marş bulunamadı.
+			</div>
+		);
 	}
 
 	return (
-		<div className="py-16">
-			
-			<div className='flex items-center justify-between mb-4'>
-				<h1 className="text-2xl font-medium mb-4 text-neutral-800 text-center">
+		<div className="py-8 sm:py-16 px-4 sm:px-6 md:px-8 max-w-4xl mx-auto">
+			{/* Başlık ve Geri Dön */}
+			<div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4 mb-6">
+				<h1 className="text-lg sm:text-2xl font-medium text-neutral-800 text-center sm:text-left">
 					{mars.title}
 				</h1>
-				<a href='/marslar' className='px-4 py-2 bg-neutral-800 text-white rounded hover:bg-neutral-600 transition-all cursor-pointer'>Geri Dön</a>
+				<a
+					href="/marslar"
+					className="px-4 py-2 bg-neutral-800 text-white rounded hover:bg-neutral-600 transition-all text-xs sm:text-sm"
+				>
+					Geri Dön
+				</a>
 			</div>
 
-			<div className="mb-6 text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed text-center py-8">
+			{/* Şiir */}
+			<div className="mb-6 text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed text-center py-8 text-xs sm:text-sm md:text-base">
 				{renderClickablePoem(mars.mars)}
-				<p className='text-neutral-800 font-semibold pt-6'>{mars.author}</p>
+				<p className="text-neutral-800 font-semibold pt-6">{mars.author}</p>
 			</div>
-			<h2 className="text-xl text-neutral-800 mt-24 mb-4">Hikayesi</h2>
-			<div className="text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed markdown-custom">
+
+			{/* Hikaye */}
+			<h2 className="text-xl text-neutral-800 mt-16 mb-4">Hikayesi</h2>
+			<div className="text-neutral-700 border border-neutral-300 p-4 rounded-md leading-relaxed markdown-custom text-sm sm:text-base">
 				<ReactMarkdown>{mars.hikaye}</ReactMarkdown>
 			</div>
 
+			{/* Kelime Açıklama Modalı */}
 			{modalOpen && selectedWord && (
-				<div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
-					<div className="bg-white border border-neutral-300 rounded-md p-6 max-w-6xl min-w-[300px]">
+				<div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 px-4">
+					<div className="bg-white border border-neutral-300 rounded-md p-6 w-full max-w-3xl">
 						<h3 className="text-lg text-neutral-800 mb-2">{selectedWord}</h3>
 						{wordLoading ? (
 							<p className="text-neutral-600 mb-4">Yükleniyor...</p>
