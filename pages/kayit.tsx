@@ -3,28 +3,27 @@ import { useRouter } from 'next/router';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
-import { supabase } from '../lib/supabaseClient'; // Supabase client import
+import { supabase } from '../lib/supabaseClient';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-
   const router = useRouter();
 
   useEffect(() => {
-      const checkUser = async () => {
-        const { data } = await supabase.auth.getUser();
-        if (data.user) {
-          toast.error('Zaten kayıt oldunuz!');
-          router.replace('/');
-        }
-      };
-      checkUser();
-    }, [router]);
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (data.user) {
+        toast.error('Zaten kayıt oldunuz!');
+        router.replace('/');
+      }
+    };
+    checkUser();
+  }, [router]);
 
   const handleProviderRegister = (provider: 'google' | 'github') => {
-    toast.error(`${provider} ile kayıt şuan için desteklenmiyor.`);
+    toast.error(`${provider} ile kayıt şu an için desteklenmiyor.`);
   };
 
   const handleEmailRegister = async (e: React.FormEvent) => {
@@ -52,18 +51,14 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4">
-      <div className="w-full max-w-md rounded-md p-8 space-y-6 border border-neutral-300">
+    <div className="min-h-[80vh] flex items-center justify-center px-4 sm:px-6 md:px-8 py-12">
+      <div className="w-full max-w-md rounded-md p-6 sm:p-8 space-y-6 border border-neutral-300 bg-white">
         <h2 className="text-2xl text-center text-neutral-800">Kayıt Ol</h2>
         <p className="text-center text-sm text-neutral-500">Devam etmek için bir yöntem seçin</p>
 
-        {/* Email Register Form */}
         <form onSubmit={handleEmailRegister} className="space-y-4">
-
           <div className="flex flex-col gap-1">
-            <label htmlFor="email" className="text-sm text-neutral-600">
-              E-posta
-            </label>
+            <label htmlFor="email" className="text-sm text-neutral-600">E-posta</label>
             <input
               type="email"
               id="email"
@@ -75,9 +70,7 @@ const Register = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="password" className="text-sm text-neutral-600">
-              Şifre
-            </label>
+            <label htmlFor="password" className="text-sm text-neutral-600">Şifre</label>
             <input
               type="password"
               id="password"
@@ -89,9 +82,7 @@ const Register = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="confirm" className="text-sm text-neutral-600">
-              Şifre Tekrar
-            </label>
+            <label htmlFor="confirm" className="text-sm text-neutral-600">Şifre Tekrar</label>
             <input
               type="password"
               id="confirm"
@@ -104,7 +95,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full cursor-pointer bg-neutral-600 text-white py-2 rounded-md text-sm font-medium hover:bg-neutral-700 transition mt-4"
+            className="w-full bg-neutral-600 text-white py-2 rounded-md text-sm font-medium hover:bg-neutral-700 transition mt-4"
           >
             Kayıt Ol
           </button>
@@ -119,12 +110,10 @@ const Register = () => {
           </div>
         </div>
 
-
-        {/* Social Register */}
         <div className="flex flex-col gap-4">
           <button
             onClick={() => handleProviderRegister('google')}
-            className="flex items-center justify-center gap-3 py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-100 transition cursor-pointer"
+            className="flex items-center justify-center gap-3 py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-100 transition"
           >
             <FcGoogle className="text-xl" />
             <span className="text-sm text-neutral-700">Google ile Kayıt Ol</span>
@@ -132,17 +121,16 @@ const Register = () => {
 
           <button
             onClick={() => handleProviderRegister('github')}
-            className="flex items-center justify-center gap-3 py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-100 transition cursor-pointer"
+            className="flex items-center justify-center gap-3 py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-100 transition"
           >
             <FaGithub className="text-xl text-gray-800" />
             <span className="text-sm text-neutral-700">GitHub ile Kayıt Ol</span>
           </button>
         </div>
 
-        
-
         <p className="text-xs text-center text-neutral-600">
-          Zaten bir hesabınız var mı? <a href='/giris' className="underline cursor-pointer font-medium">Giriş Yapın</a>
+          Zaten bir hesabınız var mı?{' '}
+          <a href="/giris" className="underline font-medium">Giriş Yapın</a>
         </p>
       </div>
     </div>
