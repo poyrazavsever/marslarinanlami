@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
           <a href="/" className={linkClass('/')}>Ana Sayfa</a>
           <a href="/marslar" className={linkClass('/marslar')}>Marşlar</a>
           {user ? (
-            <a href="/mars-ekle" className={linkClass('/mars-ekle')}>Marş Ekle</a>
+            <a href="/profil" className={linkClass('/profil')}>Profil</a>
           ) : (
             <a href="/giris" className={linkClass('/giris')}>Giriş Yap</a>
           )}
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
               <a href="/marslar" className={`${linkClass('/marslar')} hover:underline`} onClick={() => setMenuOpen(false)}>Marşlar</a>
 
               {user ? (
-                <a href="/mars-ekle" className={`${linkClass('/mars-ekle')} hover:underline`} onClick={() => setMenuOpen(false)}>Marş Ekle</a>
+                <a href="/profil" className={`${linkClass('/profil')} hover:underline`} onClick={() => setMenuOpen(false)}>Profil</a>
               ) : (
                 <a href="/giris" className={`${linkClass('/giris')} hover:underline`} onClick={() => setMenuOpen(false)}>Giriş Yap</a>
               )}
