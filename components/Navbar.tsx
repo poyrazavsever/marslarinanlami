@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { supabase } from '../lib/supabaseClient'
+import ThemeToggle from './ThemeToggle'
 
 const Navbar: React.FC = () => {
   const pathname: string = usePathname()
@@ -38,6 +39,7 @@ const Navbar: React.FC = () => {
           <img src="/logo.svg" alt="logoForNavbar" className="h-8 w-8" />
           <p className="font-medium text-base text-neutral-900">Marşların Anlamı</p>
           <span className="text-xs px-2 rounded-md text-neutral-600 bg-neutral-200 ml-2">v1</span>
+          <ThemeToggle />
         </div>
 
         {/* Menü - büyük ekran */}
