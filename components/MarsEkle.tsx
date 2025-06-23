@@ -13,6 +13,7 @@ const MarsEkle = () => {
     const [mars, setMars] = useState('');
     const [hikaye, setHikaye] = useState('');
     const [loading, setLoading] = useState(false);
+    const [userId, setUserId] = useState<string | null>(null);
     const mdParser = new MarkdownIt();
 
     const router = useRouter();
@@ -23,6 +24,8 @@ const MarsEkle = () => {
             if (!data.user) {
                 toast.error('Bu sayfaya erişmek için giriş yapmalısınız.');
                 router.replace('/giris');
+            } else {
+                setUserId(data.user.id);
             }
         };
         checkAuth();
@@ -58,6 +61,11 @@ const MarsEkle = () => {
             return;
         }
 
+        if (!userId) {
+            toast.error('Kullanıcı bilgisi alınamadı.');
+            return;
+        }
+
         setLoading(true);
         const marsHtml = convertLinesToParagraphs(mars);
 
@@ -68,6 +76,7 @@ const MarsEkle = () => {
                 mars: marsHtml,
                 hikaye: hikaye || null,
                 approved: false,
+                user_id: userId,
             },
         ]);
         setLoading(false);
@@ -137,7 +146,7 @@ const MarsEkle = () => {
                         view={{
                             menu: true,
                             md: true,
-                            html: typeof window !== 'undefined' && window.innerWidth >= 768, // md: true, html: false on mobile
+                            html: typeof window !== 'undefined' && window.innerWidth >= 768,
                         }}
                         placeholder="Marşın hikayesini yazın..."
                     />
