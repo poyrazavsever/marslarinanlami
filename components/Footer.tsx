@@ -7,10 +7,10 @@ const Footer = () => {
       <div className="flex w-full items-center justify-center gap-4 self-end sm:self-center">
 
         <div className="flex items-center gap-2">
-          <img src="/logo.svg" alt="logoForNavbar" className="h-7 w-7" />
-          <p className="font-medium text-base text-neutral-900">Marşların Anlamı</p>
+          <img src="/logo.svg" alt="logoForNavbar" className="h-7 w-7 dark:invert" />
+          <p className="font-medium text-base text-neutral-900 dark:text-neutral-100">Marşların Anlamı</p>
         </div>
-        <span className="text-sm px-2 rounded-md text-neutral-600 bg-neutral-200">v1</span>
+        <span className="text-sm px-2 rounded-md text-neutral-600 bg-neutral-200 dark:text-neutral-300 dark:bg-neutral-800">v1</span>
       </div>
 
       <div className="w-full flex flex-col sm:flex-row items-center justify-between text-sm gap-2 sm:gap-0">

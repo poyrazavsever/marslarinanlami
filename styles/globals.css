@@ -5,10 +5,72 @@
   --font-poppins: Poppins, sans-serif;
 }
 
-body{
+body {
   font-family: var(--font-poppins);
+  @apply bg-white text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100;
 }
 
+/* Genel kutu ve borderlar */
+.border,
+.border-neutral-300 {
+  @apply border-neutral-300 dark:border-neutral-700;
+}
+.bg-white {
+  @apply dark:bg-neutral-900;
+}
+.bg-neutral-100 {
+  @apply dark:bg-neutral-800;
+}
+.bg-neutral-200 {
+  @apply dark:bg-neutral-700;
+}
+.bg-neutral-800 {
+  @apply dark:bg-neutral-700;
+}
+.text-neutral-800 {
+  @apply dark:text-neutral-100;
+}
+.text-neutral-700 {
+  @apply dark:text-neutral-200;
+}
+.text-neutral-600 {
+  @apply dark:text-neutral-300;
+}
+.text-neutral-500 {
+  @apply dark:text-neutral-400;
+}
+.text-neutral-400 {
+  @apply dark:text-neutral-500;
+}
+.text-neutral-300 {
+  @apply dark:text-neutral-400;
+}
+.text-neutral-200 {
+  @apply dark:text-neutral-500;
+}
+.text-neutral-100 {
+  @apply dark:text-neutral-600;
+}
+
+/* Butonlar ve inputlar */
+input, textarea, select {
+  @apply bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 border-neutral-300 dark:border-neutral-700;
+}
+button {
+  @apply dark:focus:ring-neutral-600;
+}
+
+/* Modal ve overlay */
+.bg-black\/60 {
+  @apply dark:bg-black/80;
+}
+
+/* Card ve kutular */
+.rounded-md {
+  @apply dark:bg-neutral-900;
+}
+
+/* Markdown özel dark stiller */
 .markdown-custom h1 {
   @apply text-3xl font-bold mt-6 mb-4;
 }
@@ -44,12 +106,15 @@ body{
 }
 .markdown-custom blockquote {
   @apply border-l-4 border-neutral-400 pl-4 italic text-neutral-600 my-4;
+  @apply border-neutral-400 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300;
 }
 .markdown-custom pre {
   @apply bg-neutral-100 rounded p-4 my-4 overflow-x-auto text-sm;
+  @apply bg-neutral-100 dark:bg-neutral-800;
 }
 .markdown-custom code {
   @apply bg-neutral-200 rounded px-1 py-0.5 font-mono text-sm;
+  @apply bg-neutral-200 dark:bg-neutral-700;
 }
 .markdown-custom img {
   @apply max-w-full rounded my-4 mx-auto;
@@ -65,4 +130,5 @@ body{
 }
 .markdown-custom th {
   @apply bg-neutral-100 font-semibold;
+  @apply bg-neutral-100 dark:bg-neutral-800;
 }
