@@ -84,7 +84,7 @@ const MarsEkle = () => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto py-12 sm:py-16 px-4 sm:px-6 md:px-8">
+        <div className="py-12 sm:py-4 px-4 sm:px-0">
             <div className="space-y-6 bg-white border border-neutral-200 rounded-md p-4 sm:p-6">
                 {/* Başlık */}
                 <div>

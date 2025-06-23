@@ -56,7 +56,7 @@ const Profil = () => {
 
     return (
         <div className="py-10 px-4 sm:px-0">
-            <h1 className="text-2xl font-bold mb-6">Profil</h1>
+            <h1 className="text-2xl font-medium mb-6 text-neutral-800">Profil</h1>
             <div className="flex gap-2 mb-6">
                 <button
                     className={`px-4 py-2 rounded-md cursor-pointer text-sm font-medium ${tab === 'bekleyen' ? 'bg-neutral-800 text-white' : 'bg-neutral-200 text-neutral-700'}`}
