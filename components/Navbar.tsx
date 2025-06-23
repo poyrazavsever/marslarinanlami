@@ -27,18 +27,17 @@ const Navbar: React.FC = () => {
 
   const linkClass = (path: string): string =>
     `block px-4 py-2 rounded-md transition-colors text-base ${pathname === path
-      ? 'bg-neutral-200 text-neutral-700'
-      : 'text-neutral-600 hover:bg-neutral-100'
-    }`
+      ? 'bg-neutral-200 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-100'
+      : 'text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-100'} `
 
   return (
     <nav className="w-full">
       <div className="flex items-center justify-between py-4 px-2">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <img src="/logo.svg" alt="logoForNavbar" className="h-8 w-8" />
-          <p className="font-medium text-base text-neutral-900">Marşların Anlamı</p>
-          <span className="text-xs px-2 rounded-md text-neutral-600 bg-neutral-200 ml-2">v1</span>
+          <img src="/logo.svg" alt="logoForNavbar" className="h-8 w- dark:invert" />
+          <p className="font-medium text-base text-neutral-900 dark:text-neutral-100">Marşların Anlamı</p>
+          <span className="text-xs p-2 rounded-full text-neutral-600 bg-neutral-200 dark:bg-neutral-500 dark:text-neutral-200 ml-2">v1</span>
           <ThemeToggle />
         </div>
 
